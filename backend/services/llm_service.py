@@ -1,17 +1,43 @@
-import json
+﻿import json
 import anthropic
 from config import ANTHROPIC_API_KEY, MODEL_NAME, USE_MOCK
 from models.schemas import RedacaoResponse
 
 
-PROMPT_SISTEMA = """Voce e um corretor especializado em redacoes do ENEM.
-Avalie o texto enviado seguindo rigorosamente as 5 competencias oficiais do ENEM:
+PROMPT_SISTEMA = """Voce e um corretor especializado em redacoes do ENEM, atualizado com os
+criterios reais de correcao aplicados a partir de 2025. Avalie o texto seguindo
+rigorosamente as 5 competencias oficiais, com estas regras especificas:
 
-1. Dominio da norma culta da lingua escrita
-2. Compreensao da proposta e aplicacao de conceitos das varias areas de conhecimento
-3. Capacidade de organizar e interpretar informacoes, fatos e argumentos
-4. Dominio dos mecanismos linguisticos para argumentacao
-5. Proposta de intervencao que respeite os direitos humanos
+COMPETENCIA 1 - Dominio da norma culta da lingua escrita
+Avalie ortografia, concordancia, regencia, pontuacao e registro formal.
+
+COMPETENCIA 2 - Compreensao da proposta e aplicacao de conceitos de varias areas
+Avalie se o repertorio sociocultural usado e PERTINENTE e bem CONTEXTUALIZADO ao
+argumento, nao apenas citado de forma solta ("repertorio de bolso"). Repertorio
+generico, decorado ou desconectado do argumento deve ser penalizado tanto aqui
+quanto na Competencia 3 (a mesma falha impacta as duas notas).
+
+COMPETENCIA 3 - Capacidade de organizar e interpretar informacoes, fatos e argumentos
+Avalie a autoria e o aprofundamento da argumentacao. Repertorio usado apenas como
+"enfeite", sem articulacao real com a tese, penaliza esta competencia junto com a 2,
+pelo mesmo motivo (nao trate como duas falhas independentes, mas como uma unica
+fragilidade que rebaixa ambas as notas).
+
+COMPETENCIA 4 - Dominio dos mecanismos linguisticos para argumentacao (coesao)
+NAO avalie por contagem de conectivos. Avalie QUALITATIVAMENTE o uso de recursos
+coesivos, classificando o repertorio coesivo do texto como: "pontual" (uso minimo,
+repetitivo), "regular" (uso adequado mas sem variedade), "constante" (bom uso,
+variado) ou "expressivo" (uso rico, preciso, que articula bem os argumentos).
+Textos com conectivos repetidos ou usados de forma mecanica devem ficar no maximo
+em "regular", mesmo que a quantidade de conectivos pareca suficiente.
+
+COMPETENCIA 5 - Proposta de intervencao que respeite os direitos humanos
+Exija os 5 elementos: agente, acao, meio/modo, finalidade e detalhamento.
+IMPORTANTE: se o elemento "ACAO" estiver ausente ou muito vago, aplique um desconto
+de 120 pontos na nota desta competencia especificamente (nao 40 pontos como em
+versoes antigas do criterio) - a acao e o elemento mais penalizado quando ausente.
+A falta dos demais elementos (agente, meio, finalidade, detalhamento) segue o
+desconto padrao de 40 pontos cada.
 
 Cada competencia vale de 0 a 200 pontos (multiplos de 40: 0, 40, 80, 120, 160, 200).
 A nota total e a soma das 5 competencias (0 a 1000).
@@ -40,21 +66,21 @@ def _resposta_mock() -> RedacaoResponse:
             {"numero": 1, "titulo": "Dominio da norma culta", "nota": 160,
              "comentario": "Bom dominio da norma padrao, com poucos deslizes pontuais de concordancia."},
             {"numero": 2, "titulo": "Compreensao da proposta", "nota": 160,
-             "comentario": "Compreendeu bem o tema, mas poderia aprofundar mais o repertorio sociocultural."},
+             "comentario": "Repertorio pertinente ao tema, bem articulado com o argumento central."},
             {"numero": 3, "titulo": "Organizacao de argumentos", "nota": 160,
              "comentario": "Argumentacao organizada, com progressao textual clara entre os paragrafos."},
             {"numero": 4, "titulo": "Mecanismos linguisticos", "nota": 120,
-             "comentario": "Uso de conectivos poderia ser mais variado para melhorar a coesao."},
+             "comentario": "Uso regular de conectivos, mas com pouca variedade - repertorio coesivo pontual em trechos."},
             {"numero": 5, "titulo": "Proposta de intervencao", "nota": 160,
-             "comentario": "Proposta de intervencao presente, mas faltou detalhar o agente responsavel."},
+             "comentario": "Proposta completa, mas faltou detalhar melhor o elemento de acao especifica."},
         ],
         pontos_fortes=[
             "Boa estrutura dissertativo-argumentativa",
-            "Repertorio sociocultural pertinente ao tema",
+            "Repertorio sociocultural bem contextualizado ao tema",
         ],
         pontos_melhoria=[
-            "Variar mais os conectivos entre paragrafos",
-            "Detalhar melhor a proposta de intervencao (agente, acao, meio, finalidade, detalhamento)",
+            "Variar mais os conectivos para elevar o repertorio coesivo de regular para constante",
+            "Detalhar melhor a acao da proposta de intervencao (elemento mais penalizado quando vago)",
         ],
     )
 
