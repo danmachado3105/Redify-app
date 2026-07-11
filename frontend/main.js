@@ -1,7 +1,10 @@
-// Data provável do ENEM 2026 - ajuste quando o INEP confirmar a data oficial
+// ---------- Contador regressivo ENEM 2026 ----------
 const dataEnem = new Date("2026-11-08T13:00:00-03:00");
 
 function atualizarContador() {
+  const elDias = document.getElementById('cd-days');
+  if (!elDias) return; // essa página não tem o contador, ignora
+
   const agora = new Date();
   const diff = dataEnem - agora;
 
@@ -27,6 +30,7 @@ function atualizarContador() {
 atualizarContador();
 setInterval(atualizarContador, 1000);
 
+// ---------- Correção de redação (só existe em app.html) ----------
 const API_URL = "http://127.0.0.1:8000/corrigir";
 
 const input = document.getElementById('essay-input');
@@ -34,44 +38,47 @@ const charCount = document.getElementById('char-count');
 const submitBtn = document.getElementById('submit-btn');
 const resultArea = document.getElementById('result-area');
 
-input.addEventListener('input', () => {
-  charCount.textContent = `${input.value.length} caracteres`;
-});
+if (input && submitBtn) {
+  input.addEventListener('input', () => {
+    charCount.textContent = `${input.value.length} caracteres`;
+  });
 
-submitBtn.addEventListener('click', async () => {
-  const texto = input.value.trim();
+  submitBtn.addEventListener('click', async () => {
+    const texto = input.value.trim();
 
-  if (texto.length < 50) {
-    resultArea.innerHTML = `<div class="result-empty" style="border-color:#FF5C7C; color:#FF5C7C;">
-      Escreva pelo menos 50 caracteres para poder corrigir.
-    </div>`;
-    return;
-  }
+    if (texto.length < 50) {
+      resultArea.innerHTML = `<div class="result-empty" style="border-color:#FF5C7C; color:#FF5C7C;">
+        Escreva pelo menos 50 caracteres para poder corrigir.
+      </div>`;
+      return;
+    }
 
-  resultArea.innerHTML = `<div class="loading-dots"><span></span><span></span><span></span></div>`;
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Corrigindo...";
+    resultArea.innerHTML = `<div class="loading-dots"><span></span><span></span><span></span></div>`;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Corrigindo...";
 
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ texto })
-    });
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ texto })
+      });
 
-    if (!response.ok) throw new Error("Erro na correção");
+      if (!response.ok) throw new Error("Erro na correção");
 
-    const data = await response.json();
-    renderResult(data);
-  } catch (err) {
-    resultArea.innerHTML = `<div class="result-empty" style="border-color:#FF5C7C; color:#FF5C7C;">
-      Não foi possível corrigir agora. Confira se o backend está rodando em localhost:8000.
-    </div>`;
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Corrigir minha redação";
-  }
-});
+      const data = await response.json();
+      renderResult(data);
+    } catch (err) {
+      console.error(err);
+      resultArea.innerHTML = `<div class="result-empty" style="border-color:#FF5C7C; color:#FF5C7C;">
+        Não foi possível corrigir agora. Confira se o backend está rodando em localhost:8000.
+      </div>`;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Corrigir minha redação";
+    }
+  });
+}
 
 function renderResult(data) {
   const pct = Math.round((data.nota_total / 1000) * 100);
@@ -88,7 +95,7 @@ function renderResult(data) {
     </div>
     <div class="paywall">
       <p>Veja a nota detalhada por competência, pontos fortes e o que melhorar.</p>
-      <button class="btn btn-primary" id="unlock-btn">Desbloquear feedback completo — R$ 4,90</button>
+      <button class="btn btn-primary" id="unlock-btn">Desbloquear feedback completo — R$ 2,90</button>
     </div>
   `;
 
@@ -124,13 +131,15 @@ function renderFullFeedback(data) {
   `;
 }
 
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const jaAberto = item.classList.contains('open');
+// ---------- FAQ (só existe em index.html) ----------
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.faq-question');
+  if (!btn) return;
 
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  const item = btn.closest('.faq-item');
+  const jaAberto = item.classList.contains('open');
 
-    if (!jaAberto) item.classList.add('open');
-  });
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+  if (!jaAberto) item.classList.add('open');
 });
