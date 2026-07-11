@@ -12,3 +12,5 @@ MODEL_NAME = os.getenv("MODEL_NAME", "claude-haiku-4-5-20251001")
 # Modo mock: quando True, não chama a API de verdade (não gasta nada)
 # Muda pra "false" no .env quando você tiver créditos configurados
 USE_MOCK = os.getenv("USE_MOCK", "true").lower() == "true"
+
+MP_ACCESS_TOKEN = os.getenv("MP_ACCESS_TOKEN", "")

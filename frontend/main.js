@@ -99,8 +99,22 @@ function renderResult(data) {
     </div>
   `;
 
-  document.getElementById('unlock-btn').addEventListener('click', () => {
-    renderFullFeedback(data);
+  document.getElementById('unlock-btn').addEventListener('click', async () => {
+    sessionStorage.setItem('redify_correcao', JSON.stringify(data));
+
+    const btn = document.getElementById('unlock-btn');
+    btn.disabled = true;
+    btn.textContent = "Redirecionando...";
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/criar-pagamento', { method: 'POST' });
+      const resultado = await response.json();
+      window.location.href = resultado.init_point;
+    } catch (err) {
+      console.error(err);
+      btn.disabled = false;
+      btn.textContent = "Desbloquear feedback completo — R$ 2,90";
+    }
   });
 }
 

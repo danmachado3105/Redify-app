@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.correction import router as correction_router
+from routes.payment import router as payment_router
 
 app = FastAPI(title="Redify API", version="0.1.0")
 
@@ -13,6 +14,7 @@ app.add_middleware(
 )
 
 app.include_router(correction_router)
+app.include_router(payment_router)
 
 
 @app.get("/")
