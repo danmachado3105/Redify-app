@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Redify — Correção de redação com IA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,9 +16,11 @@
     <nav>
       <a href="#como-funciona">Como funciona</a>
       <a href="#competencias">Competências</a>
-      <a href="#testar">Testar agora</a>
+
+      <a href="index.html#planos">Planos</a>
+      <a href="./app.html">Testar agora</a>
     </nav>
-    <a href="#testar" class="btn btn-primary">Corrigir minha redação</a>
+      <a href="app.html" class="btn btn-primary">Corrigir minha redação</a>
   </header>
 
   <section class="hero">
@@ -27,11 +29,11 @@
       <h1>Sua redação corrigida <span class="accent">como o ENEM</span> <span class="underline">corrige de verdade</span></h1>
       <p class="lead">Cole sua redação e receba, em minutos, uma nota estimada por competência com feedback específico — sem enrolação, sem repertório de bolso.</p>
       <div class="hero-ctas">
-        <a href="#testar" class="btn btn-primary">Corrigir grátis agora</a>
+        <a href="app.html" class="btn btn-primary">Corrigir grátis agora</a>
         <a href="#como-funciona" class="btn btn-ghost">Como funciona</a>
       </div>
       <div class="trust-line">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12.5L14 3.5" stroke="#22C99B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12.5L14 3.5" stroke="#2ECC91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Sem cadastro complicado — resultado na hora
       </div>
     </div>
@@ -52,6 +54,23 @@
       <div class="float-chip chip-2"><span class="dot"></span>C2 — repertório pontual</div>
       <div class="float-chip chip-3"><span class="dot"></span>C5 — falta detalhar a ação</div>
     </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="countdown-section">
+    <div class="countdown-glow"></div>
+    <span class="countdown-label">⏳ Faltam para o ENEM 2026</span>
+    <div class="countdown-items">
+      <div class="countdown-item"><span id="cd-days">00</span><small>dias</small></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span id="cd-hours">00</span><small>horas</small></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span id="cd-min">00</span><small>min</small></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span id="cd-sec">00</span><small>seg</small></div>
+    </div>
+    <p class="countdown-sub">Cada dia treinando redação conta. Comece agora!</p>
   </section>
 </div>
 
@@ -86,37 +105,155 @@
   <section class="section">
     <div class="section-head">
       <h2>As 5 competências, sem "repertório de bolso"</h2>
-      <p>A gente avalia como o ENEM avalia de verdade — inclusive nos detalhes que a maioria dos corretores por IA ainda ignora.</p>
+      <p>A gente calibra a correção com as mudanças práticas identificadas por corretores e documentos internos do ENEM 2025 — detalhes que a maioria dos corretores por IA ainda ignora.</p>
     </div>
     <div class="comp-grid">
-      <div class="comp-card"><div class="comp-num">C1</div><h4>Norma culta</h4><p>Ortografia, concordância e registro formal da língua escrita.</p></div>
-      <div class="comp-card"><div class="comp-num">C2</div><h4>Compreensão do tema</h4><p>Repertório precisa estar contextualizado, não só citado.</p></div>
-      <div class="comp-card"><div class="comp-num">C3</div><h4>Organização de ideias</h4><p>Autoria e aprofundamento real da argumentação.</p></div>
-      <div class="comp-card"><div class="comp-num">C4</div><h4>Coesão textual</h4><p>Avaliação qualitativa dos conectivos, não contagem.</p></div>
-      <div class="comp-card"><div class="comp-num">C5</div><h4>Proposta de intervenção</h4><p>Falta da ação pesa até 120 pontos na nota final.</p></div>
+      <a href="competencia.html?c=1" class="comp-card">
+        <div class="comp-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="comp-num">C1</div>
+        <h4>Norma culta</h4>
+        <p>Ortografia, concordância e registro formal da língua escrita.</p>
+      </a>
+      <a href="competencia.html?c=2" class="comp-card">
+        <div class="comp-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="comp-num">C2</div>
+        <h4>Compreensão do tema</h4>
+        <p>Repertório precisa estar contextualizado, não só citado.</p>
+      </a>
+      <a href="competencia.html?c=3" class="comp-card">
+        <div class="comp-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="comp-num">C3</div>
+        <h4>Organização de ideias</h4>
+        <p>Autoria e aprofundamento real da argumentação.</p>
+      </a>
+      <a href="competencia.html?c=4" class="comp-card">
+        <div class="comp-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 6L4 12l5 6M15 6l5 6-5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="comp-num">C4</div>
+        <h4>Coesão textual</h4>
+        <p>Avaliação qualitativa dos conectivos, não contagem.</p>
+      </a>
+      <a href="competencia.html?c=5" class="comp-card">
+        <div class="comp-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 8v6M4.2 4.2l4.2 4.2m7.2 7.2l4.2 4.2M2 12h6m8 0h6M4.2 19.8l4.2-4.2m7.2-7.2l4.2-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="comp-num">C5</div>
+        <h4>Proposta de intervenção</h4>
+        <p>Falta da ação pesa até 120 pontos na nota final.</p>
+      </a>
     </div>
   </section>
 </div>
 
-<div class="wrap" id="testar">
+<div class="wrap" id="planos">
   <section class="section">
-    <div class="try-section">
-      <div class="section-head" style="margin-bottom:32px;">
-        <h2>Teste agora, de graça</h2>
-        <p>Cole o texto da sua redação abaixo e veja a correção completa.</p>
+    <div class="section-head">
+      <div class="eyebrow" style="justify-content:center; display:inline-flex; background:rgba(255,107,129,0.12); color:var(--coral);">🔥 Promoção reta final ENEM 2026</div>
+      <h2>Preços claros. Sem assinatura obrigatória.</h2>
+      <p>Pague apenas pelas correções que usar — sem cartão salvo, sem cobrança recorrente.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tag">Avulso</div>
+        <div class="price-old">R$ 4,90</div>
+        <div class="price-value"><span class="price-currency">R$</span>2<span class="price-cents">,90</span></div>
+        <p class="price-desc">1 correção completa</p>
+        <ul class="price-features">
+          <li>Nota por competência</li>
+          <li>Pontos fortes e de melhoria</li>
+          <li>Resultado em minutos</li>
+        </ul>
+        <a href="app.html" class="btn btn-ghost" style="width:100%;">Testar agora</a>
       </div>
-      <div class="try-grid">
-        <div>
-          <textarea id="essay-input" placeholder="Cole aqui o texto da sua redação (mínimo 50 caracteres)..."></textarea>
-          <div class="char-count" id="char-count">0 caracteres</div>
-          <div style="margin-top:16px;">
-            <button class="btn btn-primary" id="submit-btn" style="width:100%;">Corrigir minha redação</button>
-          </div>
+
+      <div class="price-card price-card-featured">
+        <div class="price-badge">Mais escolhido</div>
+        <div class="price-tag">Pacote 5</div>
+        <div class="price-old">R$ 19,90</div>
+        <div class="price-value"><span class="price-currency">R$</span>12<span class="price-cents">,90</span></div>
+        <p class="price-desc">5 correções completas <span class="price-save">economize 35%</span></p>
+        <ul class="price-features">
+          <li>Tudo do plano avulso</li>
+          <li>Ideal para treinar ao longo do mês</li>
+          <li>Acompanhe sua evolução</li>
+        </ul>
+        <a href="app.html" class="btn btn-primary" style="width:100%;">Escolher pacote</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tag">Pacote 15</div>
+        <div class="price-old">R$ 49,90</div>
+        <div class="price-value"><span class="price-currency">R$</span>29<span class="price-cents">,90</span></div>
+        <p class="price-desc">15 correções completas <span class="price-save">economize 40%</span></p>
+        <ul class="price-features">
+          <li>Tudo do plano avulso</li>
+          <li>Melhor custo-benefício</li>
+          <li>Ideal para reta final do ENEM</li>
+        </ul>
+        <a href="app.html" class="btn btn-ghost" style="width:100%;">Escolher pacote</a>
+      </div>
+    </div>
+    <p class="pricing-note">⏳ Preços de lançamento válidos até a prova do ENEM 2026 — depois voltam ao valor cheio.</p>
+  </section>
+</div>
+
+<div class="wrap" id="faq">
+  <section class="section">
+    <div class="section-head">
+      <h2>Perguntas frequentes</h2>
+      <p>Tudo que você precisa saber antes de testar.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">
+          A correção é confiável?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>A correção é feita por inteligência artificial, calibrada com base nos critérios oficiais das 5 competências do ENEM e nas mudanças práticas reportadas na correção de 2025. Ela funciona como uma ferramenta de treino e diagnóstico — não substitui a correção oficial da prova, mas ajuda a identificar pontos fortes e fracos antes do dia do exame.</p>
         </div>
-        <div id="result-area">
-          <div class="result-empty">
-            Sua correção completa vai aparecer aqui — nota por competência, pontos fortes e o que melhorar.
-          </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Quanto custa usar o Redify?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Você paga apenas pelas correções que usar, sem mensalidade obrigatória. Os planos vão de correções avulsas a pacotes com desconto para quem quer treinar com mais frequência. Veja os valores na seção de planos.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Funciona para qualquer tema de redação?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Sim. Você pode colar redações de qualquer tema no formato dissertativo-argumentativo do ENEM. A IA avalia a estrutura e os critérios das 5 competências independentemente do assunto.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Meus dados e minha redação ficam salvos?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Tratamos o conteúdo da sua redação com privacidade. Para mais detalhes sobre como os dados são usados e armazenados, consulte nossa <a href="privacidade.html" style="color:var(--brand); text-decoration:underline;">política de privacidade</a>.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Quanto tempo demora a correção?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>A correção é processada em poucos minutos, direto na tela — sem espera de dias como em uma correção manual tradicional.</p>
         </div>
       </div>
     </div>
@@ -124,7 +261,8 @@
 </div>
 
 <footer>
-  Redify — correção de redação com IA calibrada nos critérios do ENEM 2025.
+  Redify — correção de redação com IA calibrada nas mudanças reportadas na correção do ENEM 2025.
+  <div class="footer-links"><a href="privacidade.html">Política de Privacidade</a></div>
 </footer>
 
 <script src="main.js"></script>

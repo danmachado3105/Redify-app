@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corrigir redação — Redify</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a href="index.html" class="logo"><span class="logo-dot"></span>Redify</a>
+    <nav>
+      <a href="index.html#como-funciona">Como funciona</a>
+      <a href="index.html#competencias">Competências</a>
+      <a href="index.html#planos">Planos</a>
+    </nav>
+    <a href="index.html" class="btn btn-ghost">Voltar ao início</a>
+  </header>
+</div>
+
+<div class="wrap">
+  <section class="section">
+    <div class="try-section">
+      <div class="section-head" style="margin-bottom:24px;">
+        <h2>Teste agora, de graça</h2>
+        <p>Cole o texto da sua redação abaixo e veja a correção completa, competência por competência.</p>
+      </div>
+      <div class="try-grid">
+        <div>
+          <p class="try-intro">
+            Escreva ou cole sua redação no espaço ao lado. Nossa IA avalia como um corretor
+            do ENEM avaliaria: <strong>norma culta</strong>, <strong>repertório contextualizado</strong>,
+            <strong>organização de argumentos</strong>, <strong>coesão</strong> e
+            <strong>proposta de intervenção completa</strong>. Quanto mais próximo do texto final, mais precisa a correção.
+          </p>
+          <div class="paper-wrap">
+            <textarea id="essay-input" placeholder="Cole aqui o texto da sua redação (mínimo 50 caracteres)..."></textarea>
+          </div>
+          <div class="char-count" id="char-count">0 caracteres</div>
+          <div style="margin-top:16px;">
+            <button class="btn btn-primary" id="submit-btn" style="width:100%;">Corrigir minha redação</button>
+          </div>
+        </div>
+        <div id="result-area">
+          <div class="result-empty">
+            Sua correção completa vai aparecer aqui — nota por competência, pontos fortes e o que melhorar.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  Redify — correção de redação com IA calibrada nas mudanças reportadas na correção do ENEM 2025.
+  <div class="footer-links"><a href="privacidade.html">Política de Privacidade</a></div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

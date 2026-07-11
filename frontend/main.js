@@ -1,3 +1,32 @@
+// Data provável do ENEM 2026 - ajuste quando o INEP confirmar a data oficial
+const dataEnem = new Date("2026-11-08T13:00:00-03:00");
+
+function atualizarContador() {
+  const agora = new Date();
+  const diff = dataEnem - agora;
+
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = "00";
+    document.getElementById('cd-hours').textContent = "00";
+    document.getElementById('cd-min').textContent = "00";
+    document.getElementById('cd-sec').textContent = "00";
+    return;
+  }
+
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const min = Math.floor((diff / (1000 * 60)) % 60);
+  const seg = Math.floor((diff / 1000) % 60);
+
+  document.getElementById('cd-days').textContent = String(dias).padStart(2, '0');
+  document.getElementById('cd-hours').textContent = String(horas).padStart(2, '0');
+  document.getElementById('cd-min').textContent = String(min).padStart(2, '0');
+  document.getElementById('cd-sec').textContent = String(seg).padStart(2, '0');
+}
+
+atualizarContador();
+setInterval(atualizarContador, 1000);
+
 const API_URL = "http://127.0.0.1:8000/corrigir";
 
 const input = document.getElementById('essay-input');
@@ -47,16 +76,6 @@ submitBtn.addEventListener('click', async () => {
 function renderResult(data) {
   const pct = Math.round((data.nota_total / 1000) * 100);
 
-  const compBars = data.competencias.map(c => `
-    <div class="comp-bar-row">
-      <div class="comp-bar-top"><span>C${c.numero} — ${c.titulo}</span><span>${c.nota}/200</span></div>
-      <div class="comp-bar-track"><div class="comp-bar-fill" style="width:${(c.nota/200)*100}%"></div></div>
-    </div>
-  `).join('');
-
-  const fortes = data.pontos_fortes.map(p => `<li>${p}</li>`).join('');
-  const melhorias = data.pontos_melhoria.map(p => `<li>${p}</li>`).join('');
-
   resultArea.innerHTML = `
     <div class="result-score">
       <div class="score-ring" style="--pct:${pct}">
@@ -67,6 +86,30 @@ function renderResult(data) {
         <div class="result-score-total">${data.nota_total} / 1000</div>
       </div>
     </div>
+    <div class="paywall">
+      <p>Veja a nota detalhada por competência, pontos fortes e o que melhorar.</p>
+      <button class="btn btn-primary" id="unlock-btn">Desbloquear feedback completo — R$ 4,90</button>
+    </div>
+  `;
+
+  document.getElementById('unlock-btn').addEventListener('click', () => {
+    renderFullFeedback(data);
+  });
+}
+
+function renderFullFeedback(data) {
+  const compBars = data.competencias.map(c => `
+    <div class="comp-bar-row">
+      <div class="comp-bar-top"><span>C${c.numero} — ${c.titulo}</span><span>${c.nota}/200</span></div>
+      <div class="comp-bar-track"><div class="comp-bar-fill" style="width:${(c.nota/200)*100}%"></div></div>
+    </div>
+  `).join('');
+
+  const fortes = data.pontos_fortes.map(p => `<li>${p}</li>`).join('');
+  const melhorias = data.pontos_melhoria.map(p => `<li>${p}</li>`).join('');
+
+  const paywall = document.querySelector('.paywall');
+  paywall.outerHTML = `
     ${compBars}
     <div class="feedback-lists">
       <div class="feedback-box good">
@@ -80,3 +123,14 @@ function renderResult(data) {
     </div>
   `;
 }
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const jaAberto = item.classList.contains('open');
+
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+    if (!jaAberto) item.classList.add('open');
+  });
+});
