@@ -484,3 +484,39 @@ footer { text-align: center; padding: 40px 0; color: var(--ink-soft); font-size:
 .footer-links { margin-top: 10px; }
 .footer-links a { color: var(--ink-soft); font-size: 12.5px; text-decoration: underline; }
 .footer-links a:hover { color: var(--brand); }
+
+.recado-professor {
+  background: rgba(46,204,145,0.08);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--brand);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.recado-label { font-size: 12.5px; font-weight: 700; color: var(--brand); text-transform: uppercase; letter-spacing: .03em; }
+.recado-professor p { margin-top: 8px; font-size: 14.5px; color: var(--ink); line-height: 1.6; }
+
+.comp-comentario { font-size: 13px; color: var(--ink-soft); margin: 8px 0 4px; }
+
+.comp-detalhe { margin-top: 4px; margin-bottom: 8px; }
+.comp-trecho, .comp-sugestao {
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 6px;
+}
+.comp-trecho-label, .comp-sugestao-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.comp-trecho-label { color: var(--coral); }
+.comp-sugestao-label { color: var(--brand); }
+.comp-trecho-texto, .comp-sugestao-texto {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-top: 4px;
+  line-height: 1.5;
+}

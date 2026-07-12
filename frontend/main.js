@@ -123,6 +123,19 @@ function renderFullFeedback(data) {
     <div class="comp-bar-row">
       <div class="comp-bar-top"><span>C${c.numero} — ${c.titulo}</span><span>${c.nota}/200</span></div>
       <div class="comp-bar-track"><div class="comp-bar-fill" style="width:${(c.nota/200)*100}%"></div></div>
+      ${c.trecho_citado ? `
+        <div class="comp-detalhe">
+          <p class="comp-comentario">${c.comentario}</p>
+          <div class="comp-trecho">
+            <span class="comp-trecho-label">Na sua redação:</span>
+            <p class="comp-trecho-texto">"${c.trecho_citado}"</p>
+          </div>
+          <div class="comp-sugestao">
+            <span class="comp-sugestao-label">Sugestão:</span>
+            <p class="comp-sugestao-texto">${c.sugestao_reescrita}</p>
+          </div>
+        </div>
+      ` : `<p class="comp-comentario">${c.comentario}</p>`}
     </div>
   `).join('');
 
@@ -131,6 +144,10 @@ function renderFullFeedback(data) {
 
   const paywall = document.querySelector('.paywall');
   paywall.outerHTML = `
+    <div class="recado-professor">
+      <span class="recado-label">📝 Recado do professor</span>
+      <p>${data.recado_professor}</p>
+    </div>
     ${compBars}
     <div class="feedback-lists">
       <div class="feedback-box good">

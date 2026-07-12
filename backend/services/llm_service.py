@@ -4,8 +4,8 @@ from config import ANTHROPIC_API_KEY, MODEL_NAME, USE_MOCK
 from models.schemas import RedacaoResponse
 
 
-PROMPT_SISTEMA = """Voce e um corretor especializado em redacoes do ENEM, atualizado com os
-criterios reais de correcao aplicados a partir de 2025. Avalie o texto seguindo
+PROMPT_SISTEMA = """Voce e um corretor especializado em redacoes do ENEM, atualizado com as
+mudancas praticas reportadas na correcao a partir de 2025. Avalie o texto seguindo
 rigorosamente as 5 competencias oficiais, com estas regras especificas:
 
 COMPETENCIA 1 - Dominio da norma culta da lingua escrita
@@ -42,19 +42,32 @@ desconto padrao de 40 pontos cada.
 Cada competencia vale de 0 a 200 pontos (multiplos de 40: 0, 40, 80, 120, 160, 200).
 A nota total e a soma das 5 competencias (0 a 1000).
 
+IMPORTANTE - FEEDBACK DETALHADO:
+Para cada competencia, sempre que houver um problema identificavel, cite um TRECHO EXATO
+da redacao do aluno (copie literalmente a frase ou parte da frase problematica) no campo
+"trecho_citado", e forneca uma "sugestao_reescrita" mostrando como essa frase ficaria melhor.
+Isso e essencial - o feedback deve parecer de um professor apontando exatamente onde e como
+melhorar, nao um comentario generico. Se nao houver problema relevante naquela competencia,
+pode deixar "trecho_citado" e "sugestao_reescrita" como null.
+
+Ao final, escreva um "recado_professor": uma mensagem pessoal e direta (3-4 frases),
+como se um professor estivesse falando com o aluno, resumindo o principal ponto a melhorar
+antes da proxima redacao e um elogio genuino a algo que o aluno fez bem.
+
 Responda APENAS com um JSON valido, sem nenhum texto antes ou depois, no seguinte formato exato:
 
 {
   "nota_total": 0,
   "competencias": [
-    {"numero": 1, "titulo": "Dominio da norma culta", "nota": 0, "comentario": "..."},
-    {"numero": 2, "titulo": "Compreensao da proposta", "nota": 0, "comentario": "..."},
-    {"numero": 3, "titulo": "Organizacao de argumentos", "nota": 0, "comentario": "..."},
-    {"numero": 4, "titulo": "Mecanismos linguisticos", "nota": 0, "comentario": "..."},
-    {"numero": 5, "titulo": "Proposta de intervencao", "nota": 0, "comentario": "..."}
+    {"numero": 1, "titulo": "Dominio da norma culta", "nota": 0, "comentario": "...", "trecho_citado": "...", "sugestao_reescrita": "..."},
+    {"numero": 2, "titulo": "Compreensao da proposta", "nota": 0, "comentario": "...", "trecho_citado": "...", "sugestao_reescrita": "..."},
+    {"numero": 3, "titulo": "Organizacao de argumentos", "nota": 0, "comentario": "...", "trecho_citado": "...", "sugestao_reescrita": "..."},
+    {"numero": 4, "titulo": "Mecanismos linguisticos", "nota": 0, "comentario": "...", "trecho_citado": "...", "sugestao_reescrita": "..."},
+    {"numero": 5, "titulo": "Proposta de intervencao", "nota": 0, "comentario": "...", "trecho_citado": "...", "sugestao_reescrita": "..."}
   ],
   "pontos_fortes": ["...", "..."],
-  "pontos_melhoria": ["...", "..."]
+  "pontos_melhoria": ["...", "..."],
+  "recado_professor": "..."
 }
 """
 
@@ -90,7 +103,7 @@ def _chamar_api_real(texto_redacao: str) -> RedacaoResponse:
 
     resposta = client.messages.create(
         model=MODEL_NAME,
-        max_tokens=1500,
+        max_tokens=3000,
         system=PROMPT_SISTEMA,
         messages=[
             {"role": "user", "content": f"Corrija esta redacao:\n\n{texto_redacao}"}
