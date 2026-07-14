@@ -1,7 +1,7 @@
 import mercadopago
 from config import MP_ACCESS_TOKEN
 
-MP_MOCK = True  # muda pra False quando a conta for aprovada
+MP_MOCK = False  # documentação aprovada, testando com sandbox real
 
 sdk = mercadopago.SDK(MP_ACCESS_TOKEN)
 
@@ -30,3 +30,11 @@ def criar_preferencia_pagamento():
 
     resultado = sdk.preference().create(preference_data)
     return resultado["response"]
+
+def verificar_pagamento(payment_id: str) -> str:
+    """Consulta o status real de um pagamento direto na API do Mercado Pago."""
+    if MP_MOCK:
+        return "approved"  # em modo mock, sempre aprova
+
+    resultado = sdk.payment().get(payment_id)
+    return resultado["response"]["status"]

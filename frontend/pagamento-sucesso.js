@@ -1,9 +1,38 @@
+const params = new URLSearchParams(window.location.search);
+const paymentId = params.get('payment_id');
 const dadosSalvos = sessionStorage.getItem('redify_correcao');
 const resultArea = document.getElementById('result-area');
 
-if (!dadosSalvos) {
-  resultArea.innerHTML = `<p style="color:var(--ink-soft)">Nenhuma correção encontrada. Volte e teste novamente.</p>`;
-} else {
+async function verificarEExibir() {
+  if (!dadosSalvos) {
+    resultArea.innerHTML = `<p style="color:var(--ink-soft)">Nenhuma correção encontrada. Volte e teste novamente.</p>`;
+    return;
+  }
+
+  if (!paymentId) {
+    resultArea.innerHTML = `<p style="color:var(--coral)">Não foi possível confirmar o pagamento. Se você pagou, entre em contato pelo suporte.</p>`;
+    return;
+  }
+
+  resultArea.innerHTML = `<div class="loading-dots"><span></span><span></span><span></span></div>`;
+
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/status-pagamento/${paymentId}`);
+    const status = await response.json();
+
+    if (!status.aprovado) {
+      resultArea.innerHTML = `<p style="color:var(--coral)">Pagamento ainda não confirmado (status: ${status.status}). Aguarde alguns instantes e atualize a página.</p>`;
+      return;
+    }
+
+    exibirCorrecaoCompleta();
+  } catch (err) {
+    console.error(err);
+    resultArea.innerHTML = `<p style="color:var(--coral)">Erro ao verificar pagamento. Entre em contato pelo suporte.</p>`;
+  }
+}
+
+function exibirCorrecaoCompleta() {
   const data = JSON.parse(dadosSalvos);
 
   const compBars = data.competencias.map(c => `
@@ -26,3 +55,5 @@ if (!dadosSalvos) {
     </div>
   `;
 }
+
+verificarEExibir();
