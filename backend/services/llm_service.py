@@ -73,19 +73,40 @@ Responda APENAS com um JSON valido, sem nenhum texto antes ou depois, no seguint
 
 
 def _resposta_mock() -> RedacaoResponse:
+    """Retorna uma correção de exemplo, sem chamar a API. Usado em desenvolvimento."""
     return RedacaoResponse(
         nota_total=760,
         competencias=[
-            {"numero": 1, "titulo": "Dominio da norma culta", "nota": 160,
-             "comentario": "Bom dominio da norma padrao, com poucos deslizes pontuais de concordancia."},
-            {"numero": 2, "titulo": "Compreensao da proposta", "nota": 160,
-             "comentario": "Repertorio pertinente ao tema, bem articulado com o argumento central."},
-            {"numero": 3, "titulo": "Organizacao de argumentos", "nota": 160,
-             "comentario": "Argumentacao organizada, com progressao textual clara entre os paragrafos."},
-            {"numero": 4, "titulo": "Mecanismos linguisticos", "nota": 120,
-             "comentario": "Uso regular de conectivos, mas com pouca variedade - repertorio coesivo pontual em trechos."},
-            {"numero": 5, "titulo": "Proposta de intervencao", "nota": 160,
-             "comentario": "Proposta completa, mas faltou detalhar melhor o elemento de acao especifica."},
+            {
+                "numero": 1, "titulo": "Dominio da norma culta", "nota": 160,
+                "comentario": "Bom dominio da norma padrao, com poucos deslizes pontuais de concordancia.",
+                "trecho_citado": "esses povos em reportagens, entrevistas, por exemplo, de forma",
+                "sugestao_reescrita": "esses povos em reportagens e entrevistas, por exemplo, de forma"
+            },
+            {
+                "numero": 2, "titulo": "Compreensao da proposta", "nota": 160,
+                "comentario": "Repertorio pertinente ao tema, bem articulado com o argumento central.",
+                "trecho_citado": None,
+                "sugestao_reescrita": None
+            },
+            {
+                "numero": 3, "titulo": "Organizacao de argumentos", "nota": 160,
+                "comentario": "Argumentacao organizada, com progressao textual clara entre os paragrafos.",
+                "trecho_citado": None,
+                "sugestao_reescrita": None
+            },
+            {
+                "numero": 4, "titulo": "Mecanismos linguisticos", "nota": 120,
+                "comentario": "Uso regular de conectivos, mas com pouca variedade - repertorio coesivo pontual em trechos.",
+                "trecho_citado": "Com isso, os desafios",
+                "sugestao_reescrita": "Diante disso, os desafios"
+            },
+            {
+                "numero": 5, "titulo": "Proposta de intervencao", "nota": 160,
+                "comentario": "Proposta completa, mas faltou detalhar melhor o elemento de acao especifica.",
+                "trecho_citado": "o Governo deve incentivar o aparecimento desses povos",
+                "sugestao_reescrita": "o Governo, por meio do Ministerio da Cultura, deve criar editais de incentivo a visibilidade desses povos"
+            },
         ],
         pontos_fortes=[
             "Boa estrutura dissertativo-argumentativa",
@@ -95,6 +116,7 @@ def _resposta_mock() -> RedacaoResponse:
             "Variar mais os conectivos para elevar o repertorio coesivo de regular para constante",
             "Detalhar melhor a acao da proposta de intervencao (elemento mais penalizado quando vago)",
         ],
+        recado_professor="Voce tem uma boa base argumentativa e usa repertorio de forma pertinente ao tema - isso ja te coloca a frente da maioria. Para a proxima redacao, foque em variar mais os conectivos entre paragrafos e deixar a proposta de intervencao mais concreta, especialmente detalhando quem faz o que. Continue assim!"
     )
 
 
