@@ -4,6 +4,10 @@ Correção de redação com Inteligência Artificial, calibrada nas mudanças re
 
 > 🚧 **Status: MVP funcional, projeto em pausa.** O produto está completo do frontend ao backend, com pagamento integrado e testado em ambiente sandbox. Deploy (domínio + hospedagem) ainda pendente — atualmente roda em ambiente local.
 
+## Demonstração
+
+<img width="395" height="245" alt="Captura de tela 2026-07-09 212226" src="https://github.com/user-attachments/assets/5915397c-f7f8-4197-94e2-49cb2700cc54" /> <img width="395" height="245" alt="Captura de tela 2026-07-09 212244" src="https://github.com/user-attachments/assets/f6051a2c-d3c8-4371-93c4-ceef3f10ad74" /> 
+
 ## O problema
 
 Corrigir redação com qualidade exige tempo de um professor especializado, e nem todo estudante tem acesso fácil a isso. O Redify usa IA para dar um feedback rápido, estruturado e acessível — citando trechos reais da redação do aluno e sugerindo reescritas, como um professor apontaria em uma correção individual.
