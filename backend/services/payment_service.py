@@ -8,13 +8,22 @@ MP_MOCK = False  # documentação aprovada, testando com sandbox real
 sdk = mercadopago.SDK(MP_ACCESS_TOKEN)
 
 
-def criar_preferencia_pagamento():
+PLANOS = {
+    "avulso": {"title": "Correção avulsa - Redify", "price": 2.90},
+    "pacote5": {"title": "Pacote 5 correções - Redify", "price": 12.90},
+    "pacote15": {"title": "Pacote 15 correções - Redify", "price": 29.90},
+}
+
+
+def criar_preferencia_pagamento(plano: str = "avulso"):
+    dados_plano = PLANOS.get(plano, PLANOS["avulso"])
+
     preference_data = {
         "items": [
             {
-                "title": "Correção completa - Redify",
+                "title": dados_plano["title"],
                 "quantity": 1,
-                "unit_price": 2.90,
+                "unit_price": dados_plano["price"],
                 "currency_id": "BRL",
             }
         ],
@@ -26,7 +35,6 @@ def criar_preferencia_pagamento():
     }
 
     resultado = sdk.preference().create(preference_data)
-    print("RESPOSTA COMPLETA DO MERCADO PAGO:", resultado)
     return resultado["response"]
     
 

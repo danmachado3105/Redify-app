@@ -95,26 +95,45 @@ function renderResult(data) {
     </div>
     <div class="paywall">
       <p>Veja a nota detalhada por competência, pontos fortes e o que melhorar.</p>
-      <button class="btn btn-primary" id="unlock-btn">Desbloquear feedback completo — R$ 2,90</button>
+      <div class="paywall-plans">
+        <button class="paywall-plan-btn" data-plano="avulso">
+          <span class="paywall-plan-nome">Avulso</span>
+          <span class="paywall-plan-preco">R$ 2,90</span>
+        </button>
+        <button class="paywall-plan-btn featured" data-plano="pacote5">
+          <span class="paywall-plan-tag">Mais escolhido</span>
+          <span class="paywall-plan-nome">Pacote 5</span>
+          <span class="paywall-plan-preco">R$ 12,90</span>
+        </button>
+        <button class="paywall-plan-btn" data-plano="pacote15">
+          <span class="paywall-plan-nome">Pacote 15</span>
+          <span class="paywall-plan-preco">R$ 29,90</span>
+        </button>
+      </div>
     </div>
   `;
 
-  document.getElementById('unlock-btn').addEventListener('click', async () => {
-    sessionStorage.setItem('redify_correcao', JSON.stringify(data));
+  document.querySelectorAll('.paywall-plan-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const plano = btn.dataset.plano;
+      sessionStorage.setItem('redify_correcao', JSON.stringify(data));
 
-    const btn = document.getElementById('unlock-btn');
-    btn.disabled = true;
-    btn.textContent = "Redirecionando...";
+      document.querySelectorAll('.paywall-plan-btn').forEach(b => b.disabled = true);
+      btn.textContent = "Redirecionando...";
 
-    try {
-      const response = await fetch('http://127.0.0.1:8000/criar-pagamento', { method: 'POST' });
-      const resultado = await response.json();
-      window.location.href = resultado.init_point;
-    } catch (err) {
-      console.error(err);
-      btn.disabled = false;
-      btn.textContent = "Desbloquear feedback completo — R$ 2,90";
-    }
+      try {
+        const response = await fetch('http://127.0.0.1:8000/criar-pagamento', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ plano })
+        });
+        const resultado = await response.json();
+        window.location.href = resultado.init_point;
+      } catch (err) {
+        console.error(err);
+        document.querySelectorAll('.paywall-plan-btn').forEach(b => b.disabled = false);
+      }
+    });
   });
 }
 
